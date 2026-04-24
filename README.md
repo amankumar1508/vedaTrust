@@ -162,12 +162,32 @@ vedaTrust/
 └── backend/                         # Node.js + Express Backend
     ├── src/
     │   ├── config/                  # DB & Env configuration
+    │   │   ├── db.js
+    │   │   └── env.js
     │   ├── controllers/             # Request handling logic
+    │   │   ├── authController.js
+    │   │   ├── verificationController.js
+    │   │   └── pharmacyController.js
     │   ├── models/                  # Mongoose Schemas
+    │   │   ├── User.js
+    │   │   ├── Prescription.js
+    │   │   ├── ScanHistory.js
+    │   │   └── Pharmacy.js
     │   ├── routes/                  # API Endpoint definitions
+    │   │   ├── authRoutes.js
+    │   │   ├── verificationRoutes.js
+    │   │   └── pharmacyRoutes.js
     │   ├── middlewares/             # Auth & Error middlewares
+    │   │   ├── authMiddleware.js
+    │   │   ├── errorMiddleware.js
+    │   │   └── uploadMiddleware.js
     │   ├── services/                # S3/Socket logic
+    │   │   ├── s3Service.js
+    │   │   └── socketService.js
     │   ├── utils/                   # Helper functions
+    │   │   ├── cryptoUtil.js
+    │   │   ├── logger.js
+    │   │   └── responseHandler.js
     │   └── server.js                # App entry point
     ├── .env                         # Secrets
     └── package.json                 # Dependencies
