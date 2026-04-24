@@ -129,111 +129,48 @@ This exposes buyers to **counterfeit, substandard, or expired drugs** that can c
 ## 📁 Folder Structure
 
 ```
-vedatrust/
-├── public/
-│   ├── favicon.ico
-│   └── sitemap.xml
+vedaTrust/
+├── frontend/                        # React + Vite Frontend
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   └── sitemap.xml
+│   ├── src/
+│   │   ├── components/              # UI Component Library
+│   │   │   ├── ui/ (Button, Input, Modal, Card, etc.)
+│   │   │   ├── layout/ (Navbar, Sidebar, Footer)
+│   │   │   ├── feedback/ (EmptyState, ErrorState)
+│   │   │   └── forms/ (FormInput, FormSelect)
+│   │   ├── pages/                   # Route-level screens
+│   │   │   ├── Landing.jsx
+│   │   │   ├── auth/ (Login, Signup, ForgotPassword)
+│   │   │   ├── verification/ (QRScan, Detail, History)
+│   │   │   ├── dashboard/ (Overview, PrescriptionUpload)
+│   │   │   ├── pharmacy/ (PharmacyLocator)
+│   │   │   └── account/ (Profile, Settings)
+│   │   ├── features/                # Redux Toolkit Slices
+│   │   ├── hooks/                   # Custom React Hooks 
+│   │   ├── services/                # API/Axios Services
+│   │   ├── store/                   # Redux Store Configuration
+│   │   ├── routes/                  # AppRoutes & Guards
+│   │   ├── theme/                   # MUI & Tailwind Tokens
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── tailwind.config.js
+│   ├── vite.config.js
+│   └── package.json
 │
-├── src/
-│   ├── components/                  # Reusable UI components
-│   │   ├── ui/
-│   │   │   ├── Button.jsx
-│   │   │   ├── Input.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   ├── Card.jsx
-│   │   │   ├── Table.jsx
-│   │   │   ├── Skeleton.jsx
-│   │   │   ├── Badge.jsx
-│   │   │   └── FileUpload.jsx
-│   │   ├── layout/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Sidebar.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   └── PageWrapper.jsx
-│   │   ├── feedback/
-│   │   │   ├── EmptyState.jsx
-│   │   │   ├── ErrorState.jsx
-│   │   │   └── ErrorBoundary.jsx
-│   │   └── forms/
-│   │       ├── FormInput.jsx
-│   │       ├── FormSelect.jsx
-│   │       └── FormFileUpload.jsx
-│   │
-│   ├── pages/                       # Route-level page components
-│   │   ├── Landing.jsx
-│   │   ├── auth/
-│   │   │   ├── Login.jsx
-│   │   │   ├── Signup.jsx
-│   │   │   └── ForgotPassword.jsx
-│   │   ├── verification/
-│   │   │   ├── QRScan.jsx
-│   │   │   ├── MedicineDetail.jsx
-│   │   │   └── VerificationHistory.jsx
-│   │   ├── dashboard/
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── PrescriptionUpload.jsx
-│   │   │   └── Notifications.jsx
-│   │   ├── pharmacy/
-│   │   │   └── PharmacyLocator.jsx
-│   │   ├── account/
-│   │   │   ├── Profile.jsx
-│   │   │   └── Settings.jsx
-│   │   └── NotFound.jsx
-│   │
-│   ├── features/                    # Redux slices (feature-based)
-│   │   ├── auth/
-│   │   │   └── authSlice.js
-│   │   ├── user/
-│   │   │   └── userSlice.js
-│   │   ├── verification/
-│   │   │   └── verificationSlice.js
-│   │   ├── pharmacy/
-│   │   │   └── pharmacySlice.js
-│   │   └── ui/
-│   │       └── uiSlice.js           # loader, theme, toast state
-│   │
-│   ├── hooks/                       # Custom React hooks
-│   │   ├── useAuth.js
-│   │   ├── useDebounce.js
-│   │   ├── useTheme.js
-│   │   ├── useFetch.js
-│   │   └── useLocalStorage.js
-│   │
-│   ├── services/                    # API service layer
-│   │   ├── axiosInstance.js         # Base Axios config + interceptors
-│   │   ├── authService.js
-│   │   ├── verificationService.js
-│   │   ├── prescriptionService.js
-│   │   └── pharmacyService.js
-│   │
-│   ├── utils/                       # Helper utilities
-│   │   ├── storage.js               # localStorage/sessionStorage helpers
-│   │   ├── formatters.js
-│   │   ├── validators.js
-│   │   └── constants.js
-│   │
-│   ├── store/
-│   │   └── store.js                 # Redux store configuration
-│   │
-│   ├── routes/
-│   │   ├── AppRoutes.jsx            # All route definitions
-│   │   ├── ProtectedRoute.jsx       # Auth guard
-│   │   └── RoleRoute.jsx            # Role-based guard (Admin/User)
-│   │
-│   ├── theme/
-│   │   ├── muiTheme.js              # MUI theme config (light + dark)
-│   │   └── tailwindTokens.js        # Shared design tokens
-│   │
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-│
-├── .eslintrc.cjs
-├── .prettierrc
-├── tailwind.config.js
-├── vite.config.js
-├── index.html
-└── package.json
+└── backend/                         # Node.js + Express Backend
+    ├── src/
+    │   ├── config/                  # DB & Env configuration
+    │   ├── controllers/             # Request handling logic
+    │   ├── models/                  # Mongoose Schemas
+    │   ├── routes/                  # API Endpoint definitions
+    │   ├── middlewares/             # Auth & Error middlewares
+    │   ├── services/                # S3/Socket logic
+    │   ├── utils/                   # Helper functions
+    │   └── server.js                # App entry point
+    ├── .env                         # Secrets
+    └── package.json                 # Dependencies
 ```
 
 ---
