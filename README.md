@@ -104,24 +104,7 @@ vedaTrust/
 
 ---
 
-## 📸 Project Screenshots / Images
 
-*(Add images of your project here by replacing the placeholder links)*
-
-### 1. Landing Page
-![Landing Page](https://via.placeholder.com/800x400?text=Landing+Page+Screenshot)
-
-### 2. Patient Dashboard
-![Patient Dashboard](https://via.placeholder.com/800x400?text=Patient+Dashboard+Screenshot)
-
-### 3. QR Medicine Verification
-![Medicine Verification](https://via.placeholder.com/800x400?text=QR+Scan+Screenshot)
-
-### 4. Prescription Upload Vault
-![Prescription Upload](https://via.placeholder.com/800x400?text=Prescription+Upload+Screenshot)
-
-### 5. Pharmacy Locator
-![Pharmacy Locator](https://via.placeholder.com/800x400?text=Pharmacy+Locator+Screenshot)
 
 ---
 
