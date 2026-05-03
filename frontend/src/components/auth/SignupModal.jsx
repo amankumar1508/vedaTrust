@@ -3,6 +3,7 @@ import { ShieldCheck, Lock, Shield, Globe, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import api from '../../services/api';
 
 const signupSchema = Yup.object({
     fullName: Yup.string()
@@ -22,21 +23,22 @@ export default function SignupModal({ onClose, switchModal }) {
     const formik = useFormik({
         initialValues: { fullName: '', email: '', password: '' },
         validationSchema: signupSchema,
-        onSubmit: (values, { setFieldError }) => {
-            const users = JSON.parse(localStorage.getItem('vedatrust_users') || '[]');
-            const userExists = users.some(u => u.email === values.email);
+        onSubmit: async (values, { setFieldError, setSubmitting }) => {
+            try {
+                const response = await api.post('/auth/signup', values);
 
-            if (userExists) {
-                setFieldError('email', 'Email already registered');
-                return;
+                if (response.data.success) {
+                    localStorage.setItem('vedatrust_token', response.data.token);
+                    localStorage.setItem('vedatrust_currentUser', JSON.stringify(response.data.user));
+                    onClose();
+                    navigate('/dashboard');
+                }
+            } catch (error) {
+                const message = error.response?.data?.error || 'Registration failed. Try again.';
+                setFieldError('email', message);
+            } finally {
+                setSubmitting(false);
             }
-
-            const newUser = { fullName: values.fullName, email: values.email, password: values.password };
-            users.push(newUser);
-            localStorage.setItem('vedatrust_users', JSON.stringify(users));
-            localStorage.setItem('vedatrust_currentUser', JSON.stringify(newUser));
-            onClose();
-            navigate('/dashboard');
         },
     });
 
