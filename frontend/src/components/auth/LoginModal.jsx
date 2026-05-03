@@ -3,6 +3,7 @@ import { Shield, Mail, Key, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import api from '../../services/api';
 
 const loginSchema = Yup.object({
     email: Yup.string()
@@ -19,18 +20,22 @@ export default function LoginModal({ onClose, switchModal }) {
     const formik = useFormik({
         initialValues: { email: '', password: '' },
         validationSchema: loginSchema,
-        onSubmit: (values, { setFieldError }) => {
-            const users = JSON.parse(localStorage.getItem('vedatrust_users') || '[]');
-            const user = users.find(u => u.email === values.email && u.password === values.password);
+        onSubmit: async (values, { setFieldError, setSubmitting }) => {
+            try {
+                const response = await api.post('/auth/login', values);
 
-            if (!user) {
-                setFieldError('password', 'Invalid email or password');
-                return;
+                if (response.data.success) {
+                    localStorage.setItem('vedatrust_token', response.data.token);
+                    localStorage.setItem('vedatrust_currentUser', JSON.stringify(response.data.user));
+                    onClose();
+                    navigate('/dashboard');
+                }
+            } catch (error) {
+                const message = error.response?.data?.error || 'Invalid email or password';
+                setFieldError('password', message);
+            } finally {
+                setSubmitting(false);
             }
-
-            localStorage.setItem('vedatrust_currentUser', JSON.stringify(user));
-            onClose();
-            navigate('/dashboard');
         },
     });
 
